@@ -1,41 +1,50 @@
 <template>
   <div>
     <h1>Posts</h1>
-    <ul>
+    <ol>
       <li v-for="post in posts" :key="post.id">
-        <router-link :to="'/post/' + post.id">
-          <b>{{ post.name }}</b> - <span>{{ post.date }}</span>
+        <router-link class="router" :to="'/post/' + post.id">
+          <h1>{{ post.title }}</h1>
         </router-link>
       </li>
-    </ul>
+    </ol>
+    <hr />
+    <ol>
+      <li v-for="album in albums" :key="album.id">
+        <h1>{{ album.title }}</h1>
+      </li>
+    </ol>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      posts: [
-        {
-          id: 1,
-          name: "Post name #1",
-          date: "20-10-2020",
-        },
-        {
-          id: 2,
-          name: "Post name #2",
-          date: "20-10-2010",
-        },
-        {
-          id: 3,
-          name: "Post name #3",
-          date: "25-12-2010",
-        },
-      ],
-    };
+  computed: {
+    ...mapState(["posts"]),
+    ...mapGetters({ albums: "getTenAlbums" }),
+  },
+  created() {
+    if (!this.$store.state.posts.length) {
+      this.$store.dispatch("getPosts");
+    }
+    if (!this.$store.state.albums.length) {
+      this.$store.dispatch("getAlbums");
+    }
   },
 };
 </script>
 
 <style>
+h1 {
+  font-size: 20px;
+}
+.router {
+  text-decoration: none;
+  color: black;
+}
+.router:hover {
+  color: blue;
+}
 </style>

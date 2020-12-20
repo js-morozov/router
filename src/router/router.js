@@ -1,28 +1,28 @@
 import Vue from "vue";
-import Router from 'vue-router'
-import Home from '../pages/HomePage'
-import Post from '../pages/Post'
-import PostItem from '../pages/PostItem'
+import Router from "vue-router";
+import Home from "../pages/HomePage";
+import Post from "../pages/Post";
+import PostInf from "../pages/PostInf";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export const router = new Router({
-  mode: 'history',
+  mode: "history",
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: "/",
+      name: "home",
+      component: Home
     },
     {
-      path: '/post',
-      name: 'post',
-      component: Post,
+      path: "/post",
+      name: "post",
+      component: Post
     },
     {
-      path: '/post/:id',
-      name: 'postItem',
-      component: PostItem,
-    },
+      path: "/post/:id",
+      name: "PostInf",
+      component: PostInf
+    }
   ]
-})
+});
